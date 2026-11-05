@@ -3,100 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>جاري التحديث والصيانة</title>
+    <title>تحسينات جارية - عودة قريبًا</title>
     
-    <!-- مكتبات التنسيق والخطوط -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Cairo', sans-serif;
-            background: #090d16;
+            background-color: #121212;
+            color: #e0e0e0;
             min-height: 100vh;
-            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            position: relative;
-            margin: 0;
             padding: 20px;
         }
 
-        /* خلفية متوهجة متحركة */
-        .bg-glow {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, rgba(79, 70, 229, 0.2) 0%, rgba(147, 51, 234, 0.08) 40%, transparent 75%);
-            z-index: -1;
-            animation: pulseGlow 6s ease-in-out infinite alternate;
+        .container {
+            background-color: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            max-width: 420px;
+            width: 100%;
+            padding: 40px 30px;
+            text-align: center;
         }
 
-        @keyframes pulseGlow {
-            0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.6; }
-            100% { transform: translate(-50%, -50%) scale(1.25); opacity: 1; }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #f59e0b;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 8px;
+            vertical-align: middle;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
         }
 
-        /* تصميم الزجاج الشفاف */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 32px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            animation: panelEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #221e16;
+            border: 1px solid #3d2f17;
+            color: #f59e0b;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 24px;
         }
 
-        @keyframes panelEntrance {
-            0% { opacity: 0; transform: translateY(30px) scale(0.95); filter: blur(10px); }
-            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
         }
 
-        /* أنيميشن الطفو للأيقونة */
-        .float-anim {
-            animation: floating 3s ease-in-out infinite;
-        }
-        @keyframes floating {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #9ca3af;
+            margin-bottom: 24px;
         }
 
-        /* أنيميشن الدوران للترس */
-        .spin-slow {
-            animation: spin 8s linear infinite;
+        .divider {
+            height: 1px;
+            background-color: #262626;
+            width: 100%;
+            margin-bottom: 20px;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+
+        .footer-note {
+            font-size: 12px;
+            color: #6b7280;
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
-
-    <div class="glass-panel w-full max-w-md p-8 text-center">
-        <!-- أيقونة الصيانة المتحركة -->
-        <div class="w-24 h-24 bg-gradient-to-tr from-amber-500 to-orange-600 rounded-3xl mx-auto flex items-center justify-center mb-6 shadow-2xl shadow-orange-500/40 float-anim">
-            <i class="fas fa-tools text-4xl text-white spin-slow"></i>
+    <div class="container">
+        <div class="badge">
+            <span class="status-dot"></span>
+            تحسينات مؤقتة
         </div>
 
-        <h1 class="text-2xl font-extrabold mb-2 tracking-wide">نعمل على تحديث الموقع</h1>
-        <p class="text-gray-300 text-sm mb-6 leading-relaxed">
-            نقوم حالياً بإجراء بعض التطويرات والتحسينات، وعادة ما تستغرق هذه العملية من <span class="text-emerald-400 font-bold">5 إلى 15 دقيقة</span> لنعود للعمل بكامل طاقتنا! 🚀
+        <h1>نعمل على تحديث النظام</h1>
+        
+        <p>
+            نقوم حالياً بإجراء بعض المراجعات التقنية. عادة ما تستغرق هذه العملية من <strong>5 إلى 15 دقيقة</strong> لنعود للعمل بصورة طبيعية.
         </p>
 
-        <!-- تنبيه هادئ -->
-        <div class="p-4 bg-white/5 border border-white/10 rounded-2xl text-xs text-gray-400 flex items-center justify-center gap-2">
-            <i class="fas fa-shield-alt text-indigo-400"></i>
-            <span>شكراً لصبرك، نعود لكم فور الانتهاء.</span>
+        <div class="divider"></div>
+
+        <div class="footer-note">
+            شكراً لتفهمك وحسن انتظارك.
         </div>
     </div>
 
