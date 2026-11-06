@@ -209,4 +209,38 @@
         let currentLang = "ar";
 
         function toggleLanguage() {
-            currentLang = currentLang === "ar"
+            currentLang = currentLang === "ar" ? "en" : "ar";
+            const t = translations[currentLang];
+
+            document.getElementById("htmlRoot").setAttribute("dir", t.dir);
+            document.getElementById("htmlRoot").setAttribute("lang", currentLang);
+            document.getElementById("pageTitle").innerText = t.title;
+
+            document.getElementById("badgeText").innerText = t.badge;
+            document.getElementById("headingText").innerText = t.heading;
+            document.getElementById("descText").innerHTML = t.description;
+            document.getElementById("btnTextContent").innerText = t.btnText;
+            document.getElementById("footerText").innerText = t.footer;
+            document.getElementById("langBtnText").innerText = t.langBtn;
+        }
+
+        // تسجيل رابط الشورت لينك المصدر فور الدخول
+        window.onload = function() {
+            if (document.referrer && !sessionStorage.getItem('short_link_origin')) {
+                sessionStorage.setItem('short_link_origin', document.referrer);
+            }
+        };
+
+        function retryOriginLink() {
+            const originLink = sessionStorage.getItem('short_link_origin') || document.referrer;
+            
+            if (originLink && originLink !== window.location.href) {
+                window.location.href = originLink;
+            } else {
+                window.location.reload();
+            }
+        }
+    </script>
+
+</body>
+</html>
