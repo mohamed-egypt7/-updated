@@ -37,7 +37,7 @@
             position: relative;
         }
 
-        /* زر تبديل اللغة في الأعلى */
+        /* زر تبديل اللغة */
         .lang-switch {
             position: absolute;
             top: 20px;
@@ -62,7 +62,7 @@
         .lang-switch:hover {
             background-color: #333333;
             color: #ffffff;
-            border-color: #4f46e5;
+            border-color: #6366f1;
         }
 
         .status-dot {
@@ -117,6 +117,7 @@
             margin-bottom: 24px;
         }
 
+        /* زر إعادة المحاولة والشورت لينك */
         .reload-btn {
             display: inline-flex;
             align-items: center;
@@ -155,7 +156,7 @@
 <body>
 
     <div class="container">
-        <!-- زر تبديل اللغة -->
+        <!-- زر التبديل بين العربية والإنجليزي -->
         <button class="lang-switch" onclick="toggleLanguage()" id="langBtnText">English</button>
 
         <div class="badge">
@@ -171,6 +172,7 @@
 
         <div class="divider"></div>
 
+        <!-- زر إعادة المحاولة والشورت لينك -->
         <button class="reload-btn" onclick="retryOriginLink()">
             <i class="fas fa-redo-alt"></i> <span id="btnTextContent">Try Again</span>
         </button>
@@ -181,7 +183,6 @@
     </div>
 
     <script>
-        // قواميس الترجمة لتغيير لغة الصفحة بالكامل فورياً
         const translations = {
             ar: {
                 dir: "rtl",
@@ -208,40 +209,4 @@
         let currentLang = "ar";
 
         function toggleLanguage() {
-            currentLang = currentLang === "ar" ? "en" : "ar";
-            const t = translations[currentLang];
-
-            // تحديث الاتجاه ولغة الصفحة
-            document.getElementById("htmlRoot").setAttribute("dir", t.dir);
-            document.getElementById("htmlRoot").setAttribute("lang", currentLang);
-            document.getElementById("pageTitle").innerText = t.title;
-
-            // تحديث النصوص
-            document.getElementById("badgeText").innerText = t.badge;
-            document.getElementById("headingText").innerText = t.heading;
-            document.getElementById("descText").innerHTML = t.description;
-            document.getElementById("btnTextContent").innerText = t.btnText;
-            document.getElementById("footerText").innerText = t.footer;
-            document.getElementById("langBtnText").innerText = t.langBtn;
-        }
-
-        // حفظ رابط الشورت لينك المصدر فور دخول الزائر
-        window.onload = function() {
-            if (document.referrer && !sessionStorage.getItem('short_link_origin')) {
-                sessionStorage.setItem('short_link_origin', document.referrer);
-            }
-        };
-
-        function retryOriginLink() {
-            const originLink = sessionStorage.getItem('short_link_origin') || document.referrer;
-            
-            if (originLink && originLink !== window.location.href) {
-                window.location.href = originLink;
-            } else {
-                window.location.reload();
-            }
-        }
-    </script>
-
-</body>
-</html>
+            currentLang = currentLang === "ar"
