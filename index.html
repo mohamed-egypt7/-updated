@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="htmlRoot">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تحسينات جارية - عودة قريبًا</title>
+    <title id="pageTitle">تحسينات جارية - عودة قريبًا</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
     <style>
         * {
@@ -33,6 +34,35 @@
             width: 100%;
             padding: 40px 30px;
             text-align: center;
+            position: relative;
+        }
+
+        /* زر تبديل اللغة في الأعلى */
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #262626;
+            border: 1px solid #383838;
+            color: #d1d5db;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        [dir="ltr"] .lang-switch {
+            left: auto;
+            right: 20px;
+        }
+
+        .lang-switch:hover {
+            background-color: #333333;
+            color: #ffffff;
+            border-color: #4f46e5;
         }
 
         .status-dot {
@@ -46,6 +76,11 @@
             box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
         }
 
+        [dir="ltr"] .status-dot {
+            margin-left: 0;
+            margin-right: 8px;
+        }
+
         .badge {
             display: inline-flex;
             align-items: center;
@@ -57,6 +92,7 @@
             font-size: 13px;
             font-weight: 500;
             margin-bottom: 24px;
+            margin-top: 10px;
         }
 
         h1 {
@@ -78,7 +114,36 @@
             height: 1px;
             background-color: #262626;
             width: 100%;
+            margin-bottom: 24px;
+        }
+
+        .reload-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background-color: #262626;
+            border: 1px solid #383838;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
             margin-bottom: 20px;
+        }
+
+        .reload-btn:hover {
+            background-color: #333333;
+            border-color: #6366f1;
+            color: #818cf8;
+        }
+
+        .reload-btn:active {
+            transform: scale(0.98);
         }
 
         .footer-note {
@@ -90,23 +155,93 @@
 <body>
 
     <div class="container">
+        <!-- زر تبديل اللغة -->
+        <button class="lang-switch" onclick="toggleLanguage()" id="langBtnText">English</button>
+
         <div class="badge">
             <span class="status-dot"></span>
-            تحسينات مؤقتة
+            <span id="badgeText">تحسينات مؤقتة</span>
         </div>
 
-        <h1>نعمل على تحديث النظام</h1>
+        <h1 id="headingText">نعمل على تحديث النظام</h1>
         
-        <p>
-            نقوم حالياً بإجراء بعض المراجعات التقنية. عادة ما تستغرق هذه العملية من <strong>5 إلى 15 دقيقة</strong> لنعود للعمل بصورة طبيعية.
+        <p id="descText">
+            نقوم حالياً بإجراء بعض التطويرات. عادة ما تستغرق العملية من <strong>5 إلى 15 دقيقة</strong> لنعود للعمل بصورة طبيعية.
         </p>
 
         <div class="divider"></div>
 
-        <div class="footer-note">
+        <button class="reload-btn" onclick="retryOriginLink()">
+            <i class="fas fa-redo-alt"></i> <span id="btnTextContent">Try Again</span>
+        </button>
+
+        <div class="footer-note" id="footerText">
             شكراً لتفهمك وحسن انتظارك.
         </div>
     </div>
+
+    <script>
+        // قواميس الترجمة لتغيير لغة الصفحة بالكامل فورياً
+        const translations = {
+            ar: {
+                dir: "rtl",
+                title: "تحسينات جارية - عودة قريبًا",
+                badge: "تحسينات مؤقتة",
+                heading: "نعمل على تحديث النظام",
+                description: "نقوم حالياً بإجراء بعض التطويرات. عادة ما تستغرق العملية من <strong>5 إلى 15 دقيقة</strong> لنعود للعمل بصورة طبيعية.",
+                btnText: "Try Again",
+                footer: "شكراً لتفهمك وحسن انتظارك.",
+                langBtn: "English"
+            },
+            en: {
+                dir: "ltr",
+                title: "System Maintenance - Back Soon",
+                badge: "Temporary Maintenance",
+                heading: "System Maintenance",
+                description: "We are currently performing updates. This process usually takes <strong>5 to 15 minutes</strong> to get back to normal.",
+                btnText: "Try Again",
+                footer: "Thank you for your patience and understanding.",
+                langBtn: "العربية"
+            }
+        };
+
+        let currentLang = "ar";
+
+        function toggleLanguage() {
+            currentLang = currentLang === "ar" ? "en" : "ar";
+            const t = translations[currentLang];
+
+            // تحديث الاتجاه ولغة الصفحة
+            document.getElementById("htmlRoot").setAttribute("dir", t.dir);
+            document.getElementById("htmlRoot").setAttribute("lang", currentLang);
+            document.getElementById("pageTitle").innerText = t.title;
+
+            // تحديث النصوص
+            document.getElementById("badgeText").innerText = t.badge;
+            document.getElementById("headingText").innerText = t.heading;
+            document.getElementById("descText").innerHTML = t.description;
+            document.getElementById("btnTextContent").innerText = t.btnText;
+            document.getElementById("footerText").innerText = t.footer;
+            document.getElementById("langBtnText").innerText = t.langBtn;
+        }
+
+        // حفظ رابط الشورت لينك المصدر فور دخول الزائر
+        window.onload = function() {
+            if (document.referrer && !sessionStorage.getItem('short_link_origin')) {
+                sessionStorage.setItem('short_link_origin', document.referrer);
+            }
+        };
+
+        function retryOriginLink() {
+            const originLink = sessionStorage.getItem('short_link_origin') || document.referrer;
+            
+            if (originLink && originLink !== window.location.href) {
+                window.location.href = originLink;
+            } else {
+                window.location.reload();
+            }
+        }
+    </script>
 
 </body>
 </html>
