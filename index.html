@@ -167,7 +167,7 @@
         <h1 id="headingText">نعمل على تحديث النظام</h1>
         
         <p id="descText">
-            نقوم حالياً بإجراء بعض التطويرات. عادة ما تستغرق العملية من <strong>5 إلى 15 دقيقة</strong> لنعود للعمل بصورة طبيعية.
+            نقوم حالياً بإجراء بعض التطويرات. عادة ما تستغرق العملية من <strong>30 إلى 60 دقيقة</strong> لنعود للعمل بصورة طبيعية.
         </p>
 
         <div class="divider"></div>
@@ -189,7 +189,7 @@
                 title: "تحسينات جارية - عودة قريبًا",
                 badge: "تحسينات مؤقتة",
                 heading: "نعمل على تحديث النظام",
-                description: "نقوم حالياً بإجراء بعض التطويرات. عادة ما تستغرق العملية من <strong>5 إلى 15 دقيقة</strong> لنعود للعمل بصورة طبيعية.",
+                description: "نقوم حالياً بإجراء بعض التطويرات. عادة ما تستغرق العملية من <strong>30 إلى 60 دقيقة</strong> لنعود للعمل بصورة طبيعية.",
                 btnText: "Try Again",
                 footer: "شكراً لتفهمك وحسن انتظارك.",
                 langBtn: "English"
@@ -199,7 +199,7 @@
                 title: "System Maintenance - Back Soon",
                 badge: "Temporary Maintenance",
                 heading: "System Maintenance",
-                description: "We are currently performing updates. This process usually takes <strong>5 to 15 minutes</strong> to get back to normal.",
+                description: "We are currently performing updates. This process usually takes <strong>30 to 60 minutes</strong> to get back to normal.",
                 btnText: "Try Again",
                 footer: "Thank you for your patience and understanding.",
                 langBtn: "العربية"
@@ -224,10 +224,13 @@
             document.getElementById("langBtnText").innerText = t.langBtn;
         }
 
-        // تسجيل رابط الشورت لينك المصدر فور الدخول
+        // تسجيل رابط الشورت لينك المصدر فور الدخول (سواء من الـ Referrer أو Query Params مثل ?to=)
         window.onload = function() {
-            if (document.referrer && !sessionStorage.getItem('short_link_origin')) {
-                sessionStorage.setItem('short_link_origin', document.referrer);
+            const urlParams = new URLSearchParams(window.location.search);
+            const targetUrl = urlParams.get('to') || urlParams.get('redirect') || document.referrer;
+            
+            if (targetUrl && targetUrl !== window.location.href && !sessionStorage.getItem('short_link_origin')) {
+                sessionStorage.setItem('short_link_origin', targetUrl);
             }
         };
 
