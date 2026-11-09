@@ -134,7 +134,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
 
         .reload-btn:hover {
@@ -144,6 +144,37 @@
         }
 
         .reload-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* زر المساعدة / واتساب */
+        .help-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background-color: #16241a;
+            border: 1px solid #1e3a27;
+            color: #25d366;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 20px;
+        }
+
+        .help-btn:hover {
+            background-color: #1b2e21;
+            border-color: #25d366;
+            color: #2ecc71;
+        }
+
+        .help-btn:active {
             transform: scale(0.98);
         }
 
@@ -177,6 +208,11 @@
             <i class="fas fa-redo-alt"></i> <span id="btnTextContent">Try Again</span>
         </button>
 
+        <!-- زر المساعدة والتواصل (واتساب) -->
+        <a href="https://wa.me/medo3k" target="_blank" class="help-btn">
+            <i class="fab fa-whatsapp"></i> <span id="helpTextContent">تواصل معنا (واتساب)</span>
+        </a>
+
         <div class="footer-note" id="footerText">
             شكراً لتفهمك وحسن انتظارك.
         </div>
@@ -191,6 +227,7 @@
                 heading: "نعمل على تحديث النظام",
                 description: "نقوم حالياً بإجراء بعض التطويرات. عادة ما تستغرق العملية من <strong>30 إلى 60 دقيقة</strong> لنعود للعمل بصورة طبيعية.",
                 btnText: "Try Again",
+                helpText: "تواصل معنا (واتساب)",
                 footer: "شكراً لتفهمك وحسن انتظارك.",
                 langBtn: "English"
             },
@@ -201,6 +238,7 @@
                 heading: "System Maintenance",
                 description: "We are currently performing updates. This process usually takes <strong>30 to 60 minutes</strong> to get back to normal.",
                 btnText: "Try Again",
+                helpText: "Contact Support (WhatsApp)",
                 footer: "Thank you for your patience and understanding.",
                 langBtn: "العربية"
             }
@@ -220,6 +258,7 @@
             document.getElementById("headingText").innerText = t.heading;
             document.getElementById("descText").innerHTML = t.description;
             document.getElementById("btnTextContent").innerText = t.btnText;
+            document.getElementById("helpTextContent").innerText = t.helpText;
             document.getElementById("footerText").innerText = t.footer;
             document.getElementById("langBtnText").innerText = t.langBtn;
         }
@@ -230,10 +269,8 @@
             const targetUrl = urlParams.get('to') || urlParams.get('redirect');
             
             if (targetUrl) {
-                // لو موجود في اللينك، يحولنا عليه فوراً
                 window.location.href = targetUrl;
             } else {
-                // لو مش موجود، يعيد تحميل الصفحة عادي
                 window.location.reload();
             }
         }
