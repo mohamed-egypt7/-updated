@@ -117,7 +117,7 @@
             margin-bottom: 24px;
         }
 
-        /* زر إعادة المحاولة والشورت لينك */
+        /* زر إعادة المحاولة */
         .reload-btn {
             display: inline-flex;
             align-items: center;
@@ -172,7 +172,7 @@
 
         <div class="divider"></div>
 
-        <!-- زر إعادة المحاولة والشورت لينك -->
+        <!-- زر إعادة المحاولة -->
         <button class="reload-btn" onclick="retryOriginLink()">
             <i class="fas fa-redo-alt"></i> <span id="btnTextContent">Try Again</span>
         </button>
@@ -224,22 +224,16 @@
             document.getElementById("langBtnText").innerText = t.langBtn;
         }
 
-        // تسجيل رابط الشورت لينك المصدر فور الدخول (سواء من الـ Referrer أو Query Params مثل ?to=)
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const targetUrl = urlParams.get('to') || urlParams.get('redirect') || document.referrer;
-            
-            if (targetUrl && targetUrl !== window.location.href && !sessionStorage.getItem('short_link_origin')) {
-                sessionStorage.setItem('short_link_origin', targetUrl);
-            }
-        };
-
+        // قراءة الرابط مباشرة من الـ URL لحظة الضغط بدون تخزين مسبق
         function retryOriginLink() {
-            const originLink = sessionStorage.getItem('short_link_origin') || document.referrer;
+            const urlParams = new URLSearchParams(window.location.search);
+            const targetUrl = urlParams.get('to') || urlParams.get('redirect');
             
-            if (originLink && originLink !== window.location.href) {
-                window.location.href = originLink;
+            if (targetUrl) {
+                // لو موجود في اللينك، يحولنا عليه فوراً
+                window.location.href = targetUrl;
             } else {
+                // لو مش موجود، يعيد تحميل الصفحة عادي
                 window.location.reload();
             }
         }
